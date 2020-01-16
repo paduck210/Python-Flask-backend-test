@@ -22,6 +22,13 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    completed = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return '<Todo {}>'.format(self.description)
+
+    def mark_completed(self):
+        self.completed = 1
+
+    def mark_uncompleted(self):
+        self.completed = 0

@@ -4,9 +4,14 @@
 <div class="col-md-4 col-md-offset-4">
     <h1>Todo List:</h1>
     <table class="table table-striped">
-        <th>#</th><th>User</th><th>Description</th><th></th>
+        <th>Done</th><th>#</th><th>User</th><th>Description</th><th></th>
         {% for todo in todos %}
             <tr>
+                <td>
+                    <form method="post" action="{{ url_for('todo_completed', id=todo.id) }}">
+                        <button type="submit" class="btn btn-xs"><span class="glyphicon {% if todo.completed == 1 %}glyphicon-check{% else %}glyphicon-unchecked{% endif %}"></span></button>
+                    </form>
+                </td>
                 <td>{{ todo.id }}</td>
                 <td>{{ todo.user_id }}</td>
                 <td>
@@ -23,7 +28,7 @@
         {% endfor %}
         <tr>
             <form method="post" action="{{ url_for('todos_POST') }}">
-                <td colspan="3">
+                <td colspan="4">
                     <input type="textbox" name="description" class="small-6 small-center" placeholder="Description...">
                 </td>
                 <td>
