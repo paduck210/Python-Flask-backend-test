@@ -1,3 +1,5 @@
 Flask
 Jinja2
 docopt
+Flask-Sqlalchemy
+Flask-login

@@ -8,7 +8,8 @@ from docopt import docopt
 import subprocess
 import os
 
-from alayatodo import app
+from alayatodo import app, db
+from alayatodo.models import User, Todo
 
 
 def _run_sql(filename):
@@ -31,3 +32,9 @@ if __name__ == '__main__':
         print("AlayaTodo: Database initialized.")
     else:
         app.run(use_reloader=True)
+
+
+# flask shell setting
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'User': User, 'Todo': Todo}
