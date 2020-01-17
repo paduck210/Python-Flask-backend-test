@@ -3,4 +3,5 @@ Jinja2
 docopt
 Flask-Sqlalchemy
 Flask-login
-flask-paginate
+Flask-paginate
+Flask-wtf
