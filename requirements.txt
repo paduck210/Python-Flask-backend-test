@@ -5,3 +5,4 @@ Flask-Sqlalchemy
 Flask-login
 Flask-paginate
 Flask-wtf
+werkzeug

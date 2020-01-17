@@ -10,6 +10,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from alayatodo.models import User, Todo
 from flask_paginate import Pagination, get_page_parameter
 
+
 @app.route('/')
 def home():
     with app.open_resource('../README.md', mode='r') as f:
@@ -32,7 +33,7 @@ def login_POST():
         flash("There is no username [{}]".format(username))
         return redirect('/login')
 
-    if password != user.password:
+    if not user.check_password(password):
         flash("Password is incorrect")
         return redirect('/login')
 
