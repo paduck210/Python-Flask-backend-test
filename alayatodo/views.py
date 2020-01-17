@@ -28,9 +28,11 @@ def login_POST():
     user = User.query.filter_by(username=username).first()
 
     if user is None:
+        flash("There is no username [{}]".format(username))
         return redirect('/login')
 
     if password != user.password:
+        flash("Password is incorrect")
         return redirect('/login')
 
     login_user(user)
@@ -46,7 +48,7 @@ def logout():
 @app.route('/todo/<id>', methods=['GET'])
 @login_required
 def todo(id):
-    todo = Todo.query.filter_by(id=id).first()
+    todo = Todo.query.filter_by(id=id, user_id=current_user.id).first_or_404()
     return render_template('todo.html', todo=todo)
 
 
@@ -54,7 +56,7 @@ def todo(id):
 @app.route('/todo/', methods=['GET'])
 @login_required
 def todos():
-    todos = Todo.query.all()
+    todos = Todo.query.filter_by(user_id=current_user.id)
     return render_template('todos.html', todos=todos)
 
 
@@ -77,7 +79,7 @@ def todos_POST():
 @app.route('/todo/<id>', methods=['POST'])
 @login_required
 def todo_delete(id):
-    todo = Todo.query.filter_by(id=id).first()
+    todo = Todo.query.filter_by(id=id, user_id=current_user.id).first_or_404()
     db.session.delete(todo)
     db.session.commit()
     return redirect('/todo')
@@ -86,7 +88,7 @@ def todo_delete(id):
 @app.route('/todo/<id>/completed', methods=['POST'])
 @login_required
 def todo_completed(id):
-    todo = Todo.query.filter_by(id=id).first()
+    todo = Todo.query.filter_by(id=id, user_id=current_user.id).first_or_404()
     if todo.completed == 1:
         todo.mark_uncompleted()
         db.session.commit()
