@@ -3,7 +3,8 @@ from flask import (
     redirect,
     render_template,
     request,
-    flash
+    flash,
+    jsonify
     )
 from flask_login import current_user, login_user, logout_user, login_required
 from alayatodo.models import User, Todo
@@ -98,3 +99,10 @@ def todo_completed(id):
         todo.mark_completed()
         db.session.commit()
     return redirect('/todo')
+
+
+@app.route('/todo/<id>/json', methods=['GET'])
+@login_required
+def todo_json(id):
+    todo = Todo.query.filter_by(id=id, user_id=current_user.id).first_or_404()
+    return jsonify(todo.make_dict())

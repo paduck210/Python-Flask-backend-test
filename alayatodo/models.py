@@ -32,3 +32,11 @@ class Todo(db.Model):
 
     def mark_uncompleted(self):
         self.completed = 0
+
+    def make_dict(self):
+        return {
+            "id" : self.id,
+            "description" : self.description,
+            "user_id" : self.user_id,
+            "completed" : self.completed
+        }
