@@ -22,7 +22,7 @@ Credentials:
 ![Todos](/web/img/todos.png?raw=true "Todos")
 
 ### Requirements
-* python 5.7
+* python 3.7
 * virtualenv
 * sqlite3
 * A github account
@@ -45,18 +45,23 @@ You can complete the tasks in any order.
 Separate your commits by task and use the following format for your commit messages: TASK-{task number}: {meaningful message}
 
 ### Tasks
-* TASK 1: As a user I can't add a todo without a description.
-* TASK 2: As a user I can mark a todo as completed.
-    - Write a database migration script in `resources/`
-* TASK 3: As a user I can view a todo in a JSON format.
-    - Ex: /todo/{id}/json => {id: 1, user_id: 1, description: "Lorem Ipsum"}
-* TASK 4: As a user I can see a confirmation message when I add/delete a todo.
-* TASK 5: As a user I can see my list of todos paginated.
-* TASK 6: Implement an ORM database access layer so we don’t have SQL in the controller code.
+~~* TASK 1: As a user I can't add a todo without a description.~~
+~~* TASK 2: As a user I can mark a todo as completed.~~
+    ~~- Write a database migration script in `resources/`~~
+~~* TASK 3: As a user I can view a todo in a JSON format.~~
+    ~~- Ex: /todo/{id}/json => {id: 1, user_id: 1, description: "Lorem Ipsum"}~~
+~~* TASK 4: As a user I can see a confirmation message when I add/delete a todo.~~
+~~* TASK 5: As a user I can see my list of todos paginated.~~
+~~* TASK 6: Implement an ORM database access layer so we don’t have SQL in the controller code.~~
 
 Extra tasks:
-- Fix any bug you may find.
-- Fix any security issue you may find.
+~~- Fix any bug you may find. ~~
+- Fixing minor bugs to set up
+- Make all todos are private, only users create, read, update, delete own todos.
+
+~~- Fix any security issue you may find.~~
+- Make Password Hashing using werkzeug
+- Add CSRF token to all forms
 
 
 ### Documentation
