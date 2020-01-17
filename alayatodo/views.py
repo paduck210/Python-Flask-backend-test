@@ -2,7 +2,8 @@ from alayatodo import app, db
 from flask import (
     redirect,
     render_template,
-    request
+    request,
+    flash
     )
 from flask_login import current_user, login_user, logout_user, login_required
 from alayatodo.models import User, Todo
@@ -61,7 +62,12 @@ def todos():
 @app.route('/todo/', methods=['POST'])
 @login_required
 def todos_POST():
-    description = request.form.get('description', '')
+    description = request.form.get('description')
+
+    if not description:
+        flash("Can't add description as blank")
+        return redirect('/todo')
+
     todo = Todo(user_id=current_user.id, description=description)
     db.session.add(todo)
     db.session.commit()
